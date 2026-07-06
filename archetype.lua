@@ -12,7 +12,7 @@ context:set("repo_name", context:get("project-name"))
 context:set("github_owner", context:get("org-solution-name"))
 
 -- Service configuration
-require("ports").prompt(context, { help = "HTTP port for the service" })
+require("ports").prompt(context, { ports = { { "service", help = "HTTP port for the service" }, "management", "debug" } })
 
 -- EditorConfig + gitignore
 local editor_config = require("editor-config")

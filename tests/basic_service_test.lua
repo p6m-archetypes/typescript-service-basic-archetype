@@ -116,7 +116,7 @@ prova.group("typescript-basic layout", function(g)
     t:expect(#manifests > 0, "at least one k8s manifest"):is_true()
     t:expect_all(function()
       for _, m in ipairs(manifests) do
-        local docs = yaml.parse_all(fs.read(m))
+        local docs = yaml.decode_all(fs.read(m))
         t:expect(#docs > 0, m .. " has ≥1 document"):is_true()
       end
     end)

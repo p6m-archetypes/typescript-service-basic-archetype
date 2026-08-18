@@ -11,15 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # The build and live tiers install the generated project and run its Vitest suite via pnpm,
-      # then boot it with `pnpm exec tsx`; provide the Node + pnpm toolchain so those tiers run
-      # (prova's capability gating skips them cleanly on a runner that lacks pnpm).
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      # No language toolchain step (S8b): the suite renders, inspects, and builds the archetype's
+      # own production image. Docker is the single requirement.
       - uses: prova-rs/run-action@v1
         with:
           profile: ci
+          args: "-U"

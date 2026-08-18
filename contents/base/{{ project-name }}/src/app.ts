@@ -1,5 +1,6 @@
 import Fastify, { FastifyInstance } from 'fastify';
 import { settings } from './settings';
+import { loggerOptions } from './logging';
 
 export interface BuildOptions {
   testing?: boolean;
@@ -7,7 +8,7 @@ export interface BuildOptions {
 
 export async function buildApp(opts: BuildOptions = {}): Promise<FastifyInstance> {
   const app = Fastify({
-    logger: { level: settings.logLevel },
+    logger: loggerOptions,
   });
 
   // Service routes

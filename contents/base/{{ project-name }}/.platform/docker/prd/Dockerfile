@@ -1,7 +1,11 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package.json pnpm-workspace.yaml .npmrc* ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+# A fresh render carries no pnpm-lock.yaml (the dependency set is decided at render time), so the
+# frozen path cannot engage yet. Once `pnpm install` is run once and the lockfile is committed, the
+# frozen path engages automatically and stays authoritative — the same conditional the full
+# typescript archetypes carry, never backported here because this archetype had no suite.
+RUN npm install -g pnpm && if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else pnpm install; fi
 COPY . .
 RUN pnpm build
 

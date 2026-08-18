@@ -16,12 +16,9 @@
 local SRC = "."
 
 local ANSWERS = {
-  author_name    = "Test Author",
-  author_email   = "test@example.com",
-  org_name       = "acme",
-  solution_name  = "platform",
-  prefix_name    = "Example",
-  suffix_name    = "Service",
+  project_name = "example-service",
+  solution_name = "acme-platform",
+  entity_name = "example",
   image_registry = "ghcr.io/acme",
 }
 
@@ -52,7 +49,7 @@ local project = prova.fixture("typescript-basic:project", Scope.Suite, function(
   local tree = archetect.render{
     source = SRC,
     answers = ANSWERS,
-    destination = ctx:tempdir(),
+    destination = ctx:tempdir("render1"),
     defaults = true,
   }
   return tree:dir(PROJECT_DIR)

@@ -1,15 +1,14 @@
 local context = Context.new()
 
--- Identity
-require("author").prompt(context)
-require("org").prompt(context)
-
-context:set("suffix_options", { "Service", "Orchestrator", "Adapter", "Router", "Gateway" })
-context:set("suffix_default", "Service")
-require("project").prompt(context)
-
-context:set("repo_name", context:get("project-name"))
-context:set("github_owner", context:get("org-solution-name"))
+-- Identity (S1). One library, one implementation: p6m-identity asks for the project name and
+-- the solution slug.
+-- It replaces the author x org x project composition — nothing rendered here read the author, and
+-- org_name x solution_name were two prompts building one string. `repo_name` and `github_owner`
+-- are derived inside the library, never asked.
+-- `entity = false`: this shape generates no domain code, so a CRUD entity would be a
+-- prompt whose answer nothing reads (S1b / E2).
+local identity = require("p6m-identity")
+identity.prompt(context, { entity = false })
 
 -- Service configuration
 require("ports").prompt(context, { ports = { { "service", help = "HTTP port for the service" }, "management", "debug" } })

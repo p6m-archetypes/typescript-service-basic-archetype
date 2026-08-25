@@ -1,0 +1,27 @@
+{
+  "name": "{{ project-name }}",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup src/index.ts --format cjs --dts --out-dir dist",
+    "start": "node dist/index.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@opentelemetry/exporter-trace-otlp-grpc": "^0.57",
+    "@opentelemetry/sdk-node": "^0.57",
+    "dotenv": "^16.4",
+    "fastify": "^5.2",
+    "fastify-plugin": "^5.0",
+    "pino-pretty": "^13.0",
+    "prom-client": "^15.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "tsx": "^4.19",
+    "tsup": "^8.3",
+    "typescript": "^5.7",
+    "vitest": "^2.1"
+  }
+}

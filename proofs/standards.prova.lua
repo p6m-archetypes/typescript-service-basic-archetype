@@ -19,7 +19,7 @@ local NAME_SHAPES = { "customer-service", "user-details-service" }
 for _, project in ipairs(NAME_SHAPES) do
   local spec = p6m.spec{
     language = "typescript", shape = "basic",
-    project = project, solution = "acme-platform", registry = "ghcr.io/acme",
+    project = project, organization = "acme-platform", registry = "ghcr.io/acme",
   }
 
   local project_fixture = p6m.render(spec)
@@ -42,7 +42,7 @@ end
 -- Hermetic; no docker.
 local archetype_spec = p6m.spec{
   language = "typescript", shape = "basic",
-  project = "billing-service", solution = "acme-platform", registry = "ghcr.io/acme",
+  project = "billing-service", organization = "acme-platform", registry = "ghcr.io/acme",
 }
 
 prova.group("typescript-basic: the archetype itself", function(g)
